@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import useSearch from "../../hooks/useSearch";
 import searchIcon from "../../assets/images/search.png";
 import filterIcon from "../../assets/images/filter.png";
 import menuIcon from "../../assets/images/menu.png";
 import "../../App.css";
 
-const Header = () => {
+const HeaderApp = () => {
   const [showInput, setShowInput] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,9 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isMobileFilter, setIsMobileFilter] = useState(window.innerWidth < 768);
 
-  const headerCategories = [
+  const navigate = useNavigate();
+
+  const HeaderCategories = [
     { name: "مؤلفات" },
     { name: "رحلات" },
     { name: "شخصيات" },
@@ -24,8 +27,12 @@ const Header = () => {
     { name: "المنتدى" },
   ];
 
+  const handleCategoryHeader = (categoryData) => {
+    navigate("/categories", { state: { category: categoryData } });
+  };
+
   const { query, setQuery, filteredItems } = useSearch(
-    headerCategories,
+    HeaderCategories,
     "name"
   );
 
@@ -93,7 +100,9 @@ const Header = () => {
   return (
     <div>
       <div className="bg-primaryColor text-white sm:text-lg text-sm font-bold sm:py2 py-5 flex sm:justify-around justify-center items-center ">
-        <button className="sm:flex hidden">إضافة موضوع +</button>
+        <Link to={"/addsubject"} className="sm:flex hidden">
+          إضافة موضوع +
+        </Link>
         <div className="flex sm:gap-8 gap-4">
           <a>حول الموقع</a>
           <a>تعريف بصاحب الموقع</a>
@@ -113,8 +122,6 @@ const Header = () => {
           >
             <select
               name="dateComparison"
-              // value={dateComparison}
-              // onChange={handleComparisonChange}
               className="bg-gray-300 rounded-SmallRounded text-right py-1 lg:w-80 w-44 lg:relative lg:right-0 lg:translate-y-0 lg:translate-x-0 absolute right-0 translate-y-6 translate-x-32"
             >
               <option>جميع محتويات الكتاب</option>
@@ -135,8 +142,6 @@ const Header = () => {
           >
             <input
               type="text"
-              // value={query}
-              // onChange={(e) => setQuery(e.target.value)}
               placeholder="جملة البحث"
               className="bg-gray-300 rounded-SmallRounded text-right py-1 px-5 md:w-80 w-44 md:relative md:right-0 md:translate-y-0 md:translate-x-0 absolute right-0 translate-y-6 translate-x-32"
             />
@@ -156,12 +161,18 @@ const Header = () => {
         </button>
 
         <ul className="2.5xl:flex hidden flex-row-reverse justify-center items-center gap-5">
-          {headerCategories.map((categories, index) => (
-            <li key={index} className="px-3 text-2xl">
+          {HeaderCategories.map((categories, index) => (
+            <li
+              key={index}
+              onClick={() => handleCategoryHeader(categories)}
+              className="px-3 text-2xl relative group cursor-pointer"
+            >
               {categories.name}
+              <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
             </li>
           ))}
         </ul>
+
         <p className="4xl:text-3xl text-xl ml-10 3.5xl:flex hidden">
           موقع الروضة الإسلامي
         </p>
@@ -184,9 +195,10 @@ const Header = () => {
             </button>
 
             <ul className="flex flex-col justify-center items-center h-full">
-              {headerCategories.map((categories, index) => (
+              {HeaderCategories.map((categories, index) => (
                 <li
                   key={index}
+                  onClick={() => handleCategoryHeader(categories)}
                   className="px-3 py-5 text-center text-3xl text-white"
                 >
                   {categories.name}
@@ -200,4 +212,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderApp;

@@ -1,5 +1,5 @@
-import Header from "../components/widget/Header";
-import Body from "../components/home_part/home_body";
+import Header from "../components/widget/HeaderApp";
+import CatagoriesBody from "../components/categories_part/catagories_body";
 import Telegram from "../assets/images/telegram.png";
 
 const Categories = () => {
@@ -12,7 +12,7 @@ const Categories = () => {
           اضغط هنا لمتابعة الرسائل والحلقات على تلجرام
         </p>
       </div>
-      {/* <Body /> */}
+      <CatagoriesBody />
     </div>
   );
 };

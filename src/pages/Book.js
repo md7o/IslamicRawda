@@ -1,8 +1,8 @@
 import Header from "../components/widget/HeaderApp";
-import HomeBody from "../components/home_part/home_body";
+import BookContent from "../components/book_part/book_content";
 import Telegram from "../assets/images/telegram.png";
 
-const Home = () => {
+const Book = () => {
   return (
     <div>
       <Header />
@@ -12,9 +12,9 @@ const Home = () => {
           اضغط هنا لمتابعة الرسائل والحلقات على تلجرام
         </p>
       </div>
-      <HomeBody />
+      <BookContent />
     </div>
   );
 };
 
-export default Home;
+export default Book;

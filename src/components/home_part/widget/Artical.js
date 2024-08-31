@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Artical = () => {
   const articals = [
     { essayName: "عنوان طويل" },
@@ -33,9 +35,11 @@ const Artical = () => {
           ))}
         </div>
         <div className="flex justify-center">
-          <button className=" bg-primaryColor text-white md:text-3xl text-xl py-3 px-4 rounded-SmallRounded">
-            المزيد من المقالات
-          </button>
+          <Link to={"/book"}>
+            <button className=" bg-primaryColor text-white md:text-3xl text-xl py-3 px-4 rounded-SmallRounded">
+              المزيد من المقالات
+            </button>
+          </Link>
         </div>
       </div>
     </div>

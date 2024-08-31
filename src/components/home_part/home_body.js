@@ -1,6 +1,6 @@
 import Artical from "./widget/Artical";
 import GeneralArticals from "./widget/generalArticals";
-import Categories from "./widget/Categories";
+import CategoriesList from "./widget/categories_list";
 
 const HomeBody = () => {
   return (
@@ -10,7 +10,7 @@ const HomeBody = () => {
         <div className="w-3/4 h-0.5 mx-auto rounded-full bg-white my-16" />
         <GeneralArticals />
         <div className="w-3/4 h-0.5 mx-auto rounded-full bg-white my-36" />
-        <Categories />
+        <CategoriesList />
         <div className="lg:flex justify-center items-center text-center gap-5 pt-40 pb-5">
           <p className="text-2xl text-white font-bold lg:my-0 mb-5">
             عداد الصفحات اليومي: 2839
