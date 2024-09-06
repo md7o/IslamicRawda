@@ -1,9 +1,14 @@
-import HeaderApp from "../../components/widget/HeaderApp";
-import { useLocation } from "react-router-dom";
+import Header from "../../components/widget/Header";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const BookIndex = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { bookData } = location.state || {};
+
+  const handleBookContentNavigation = () => {
+    navigate("/book_content", { state: { bookData } });
+  };
 
   if (!bookData) {
     return <p>No book data found!</p>;
@@ -11,22 +16,24 @@ const BookIndex = () => {
 
   return (
     <div>
-      <HeaderApp />
+      <Header />
 
-      <div className="text-center bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl px-44">
-        <h1 className="text-4xl font-bold text-white py-16">فهرس الموضوعات</h1>
-        <div className="text-right bg-primaryColor text-white w-full max-w-xl rounded-SmallRounded p-8 mx-auto space-y-5">
+      <div className="text-center bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl xl:px-44 mt-16">
+        <h1 className="text-3xl font-bold text-white py-16">فهرس الموضوعات</h1>
+        <div className="text-right bg-primaryColor text-white w-full max-w-lg rounded-SmallRounded p-8 mx-auto ">
           {bookData.index.map((item, index) => (
-            <p key={index} className="text-2xl text-white ">
-              {item} -
-            </p>
+            <Link to={`/book/${index}`} state={{ bookData }}>
+              <p className="xl:text-2xl text-lg text-white hover:text-darkColor duration-100 xl:py-2 py-1">
+                {item.title} -
+              </p>
+            </Link>
           ))}
         </div>
-        <div className="lg:flex justify-center items-center text-center gap-5 pt-40 pb-5 ">
-          <p className="text-2xl text-white font-bold lg:my-0 mb-5">
+        <div className="lg:flex justify-center items-center text-center gap-5 pt-20 pb-5 ">
+          <p className="text-xl text-white font-bold lg:my-0 mb-5">
             عداد الصفحات اليومي: 2839
           </p>
-          <p className="text-2xl text-white font-bold">
+          <p className="text-xl text-white font-bold">
             عداد الصفحات العام: 15909393
           </p>
         </div>

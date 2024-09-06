@@ -1,4 +1,4 @@
-import Header from "../components/widget/HeaderApp";
+import Header from "../components/widget/Header";
 import HomeBody from "../components/home_part/home_body";
 import Telegram from "../assets/images/telegram.png";
 

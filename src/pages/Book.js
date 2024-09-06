@@ -1,5 +1,5 @@
-import Header from "../components/widget/HeaderApp";
-import BookContent from "../components/book_part/book_content";
+import Header from "../components/widget/Header";
+import Bookintroduction from "../components/book_part/book_introduction";
 import Telegram from "../assets/images/telegram.png";
 
 const Book = () => {
@@ -12,7 +12,7 @@ const Book = () => {
           اضغط هنا لمتابعة الرسائل والحلقات على تلجرام
         </p>
       </div>
-      <BookContent />
+      <Bookintroduction />
     </div>
   );
 };

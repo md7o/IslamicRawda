@@ -1,10 +1,10 @@
 import TextArea from "../components/add_subject/text_area";
-import HeaderApp from "../components/widget/HeaderApp";
+import Header from "../components/widget/Header";
 
 const AddSubject = () => {
   return (
     <div>
-      <HeaderApp />
+      <Header />
       <div className="text-center bg-darkColor h-full w-full 2xl:w-3/4 mx-auto rounded-3xl 2xl:px-44 px-12">
         <TextArea />
       </div>

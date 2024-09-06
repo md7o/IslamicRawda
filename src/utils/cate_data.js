@@ -409,6 +409,7 @@ export const categoriesItems = [
       },
     ],
   },
+
   {
     categoryTitle: "تربية",
     categoryContent: [
@@ -417,18 +418,38 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'دور المسجد في التربية'.",
         index: [
-          "Chapter 1: Mosque's Role",
-          "Chapter 2: Educational Methods",
-          "Chapter 3: Community Impact",
+          {
+            title: "Chapter 1: Mosque's Role",
+            details:
+              "Explores the role of mosques in education and upbringing.",
+          },
+          {
+            title: "Chapter 2: Educational Methods",
+            details:
+              "Discusses various educational methods employed by mosques.",
+          },
+          {
+            title: "Chapter 3: Community Impact",
+            details: "Examines the impact of mosques on the community.",
+          },
         ],
       },
       {
         title: "جوهرة الإسلام",
         introduction: "This is an introduction to the book 'جوهرة الإسلام'.",
         index: [
-          "Chapter 1: Essence of Islam",
-          "Chapter 2: Key Teachings",
-          "Chapter 3: Spiritual Insights",
+          {
+            title: "Chapter 1: Essence of Islam",
+            details: "Describes the fundamental essence of Islam.",
+          },
+          {
+            title: "Chapter 2: Key Teachings",
+            details: "Outlines the key teachings of Islam.",
+          },
+          {
+            title: "Chapter 3: Spiritual Insights",
+            details: "Provides spiritual insights and reflections on Islam.",
+          },
         ],
       },
       {
@@ -436,9 +457,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'المسؤولية في الإسلام'.",
         index: [
-          "Chapter 1: Islamic Responsibilities",
-          "Chapter 2: Social Duties",
-          "Chapter 3: Moral Guidance",
+          {
+            title: "Chapter 1: Islamic Responsibilities",
+            details: "Discusses the responsibilities outlined in Islam.",
+          },
+          {
+            title: "Chapter 2: Social Duties",
+            details: "Examines the social duties of Muslims.",
+          },
+          {
+            title: "Chapter 3: Moral Guidance",
+            details: "Provides moral guidance based on Islamic principles.",
+          },
         ],
       },
       {
@@ -446,9 +476,19 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'وقاية المجتمع من المسكرات'.",
         index: [
-          "Chapter 1: Understanding Intoxicants",
-          "Chapter 2: Prevention Strategies",
-          "Chapter 3: Community Health",
+          {
+            title: "Chapter 1: Understanding Intoxicants",
+            details: "Explores the nature of intoxicants and their effects.",
+          },
+          {
+            title: "Chapter 2: Prevention Strategies",
+            details:
+              "Discusses strategies for preventing the use of intoxicants.",
+          },
+          {
+            title: "Chapter 3: Community Health",
+            details: "Examines the impact of intoxicants on community health.",
+          },
         ],
       },
       {
@@ -456,9 +496,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'أخلاقيات التعامل في الإسلام'.",
         index: [
-          "Chapter 1: Ethical Principles",
-          "Chapter 2: Practical Applications",
-          "Chapter 3: Case Studies",
+          {
+            title: "Chapter 1: Ethical Principles",
+            details: "Outlines the ethical principles in Islam.",
+          },
+          {
+            title: "Chapter 2: Practical Applications",
+            details: "Provides practical applications of Islamic ethics.",
+          },
+          {
+            title: "Chapter 3: Case Studies",
+            details: "Includes case studies to illustrate ethical principles.",
+          },
         ],
       },
     ],
@@ -471,9 +520,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'الإيمان هو الأساس'.",
         index: [
-          "Chapter 1: Foundation of Faith",
-          "Chapter 2: Faith in Daily Life",
-          "Chapter 3: Challenges",
+          {
+            title: "Chapter 1: Foundation of Faith",
+            details: "Discusses the foundational aspects of faith in Islam.",
+          },
+          {
+            title: "Chapter 2: Faith in Daily Life",
+            details: "Explores how faith is integrated into daily life.",
+          },
+          {
+            title: "Chapter 3: Challenges",
+            details: "Addresses challenges related to maintaining faith.",
+          },
         ],
       },
       {
@@ -481,9 +539,19 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'العقيدة الإسلامية'.",
         index: [
-          "Chapter 1: Core Beliefs",
-          "Chapter 2: Doctrinal Differences",
-          "Chapter 3: Theological Implications",
+          {
+            title: "Chapter 1: Core Beliefs",
+            details: "Describes the core beliefs of Islamic doctrine.",
+          },
+          {
+            title: "Chapter 2: Doctrinal Differences",
+            details: "Examines differences in doctrinal beliefs within Islam.",
+          },
+          {
+            title: "Chapter 3: Theological Implications",
+            details:
+              "Explores the theological implications of Islamic beliefs.",
+          },
         ],
       },
       {
@@ -491,9 +559,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'التحقق من الإيمان'.",
         index: [
-          "Chapter 1: Verification of Faith",
-          "Chapter 2: Spiritual Practices",
-          "Chapter 3: Faith Assessment",
+          {
+            title: "Chapter 1: Verification of Faith",
+            details: "Discusses methods for verifying one's faith.",
+          },
+          {
+            title: "Chapter 2: Spiritual Practices",
+            details: "Explores spiritual practices that strengthen faith.",
+          },
+          {
+            title: "Chapter 3: Faith Assessment",
+            details: "Provides tools for assessing one's faith.",
+          },
         ],
       },
     ],
@@ -505,18 +582,38 @@ export const categoriesItems = [
         title: "الحدود و السلطان",
         introduction: "This is an introduction to the book 'الحدود و السلطان'.",
         index: [
-          "Chapter 1: Legal Limits",
-          "Chapter 2: Authority",
-          "Chapter 3: Practical Examples",
+          {
+            title: "Chapter 1: Legal Limits",
+            details: "Examines the legal limits in Islamic jurisprudence.",
+          },
+          {
+            title: "Chapter 2: Authority",
+            details: "Discusses the concept of authority in Islamic law.",
+          },
+          {
+            title: "Chapter 3: Practical Examples",
+            details:
+              "Provides practical examples of legal limits and authority.",
+          },
         ],
       },
       {
         title: "الأحكام الشرعية",
         introduction: "This is an introduction to the book 'الأحكام الشرعية'.",
         index: [
-          "Chapter 1: Legal Rulings",
-          "Chapter 2: Jurisprudence",
-          "Chapter 3: Case Studies",
+          {
+            title: "Chapter 1: Legal Rulings",
+            details:
+              "Describes various legal rulings in Islamic jurisprudence.",
+          },
+          {
+            title: "Chapter 2: Jurisprudence",
+            details: "Explores the principles of Islamic jurisprudence.",
+          },
+          {
+            title: "Chapter 3: Case Studies",
+            details: "Includes case studies to illustrate legal rulings.",
+          },
         ],
       },
       {
@@ -524,9 +621,19 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'التطبيقات الفقهية'.",
         index: [
-          "Chapter 1: Practical Applications",
-          "Chapter 2: Legal Framework",
-          "Chapter 3: Contemporary Issues",
+          {
+            title: "Chapter 1: Practical Applications",
+            details:
+              "Discusses practical applications of Islamic jurisprudence.",
+          },
+          {
+            title: "Chapter 2: Legal Framework",
+            details: "Explores the legal framework of Islamic law.",
+          },
+          {
+            title: "Chapter 3: Contemporary Issues",
+            details: "Examines contemporary issues in Islamic jurisprudence.",
+          },
         ],
       },
     ],
@@ -538,18 +645,37 @@ export const categoriesItems = [
         title: "الشورى",
         introduction: "This is an introduction to the book 'الشورى'.",
         index: [
-          "Chapter 1: Introduction to شورى",
-          "Chapter 2: The Concept of شورى",
-          "Chapter 3: Application of شورى",
+          {
+            title: "Chapter 1: Introduction to شورى",
+            details: "Introduces the concept of شورى (consultation).",
+          },
+          {
+            title: "Chapter 2: The Concept of شورى",
+            details: "Discusses the theoretical concept of شورى.",
+          },
+          {
+            title: "Chapter 3: Application of شورى",
+            details: "Examines how شورى is applied in practice.",
+          },
         ],
       },
       {
         title: "الكفاءة الإدارية",
         introduction: "This is an introduction to the book 'الكفاءة الإدارية'.",
         index: [
-          "Chapter 1: Administrative Competence",
-          "Chapter 2: Enhancing Competence",
-          "Chapter 3: Case Studies",
+          {
+            title: "Chapter 1: Administrative Competence",
+            details: "Discusses the concept of administrative competence.",
+          },
+          {
+            title: "Chapter 2: Enhancing Competence",
+            details:
+              "Provides strategies for enhancing administrative competence.",
+          },
+          {
+            title: "Chapter 3: Case Studies",
+            details: "Includes case studies on administrative competence.",
+          },
         ],
       },
       {
@@ -557,9 +683,20 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'استعصاء دين الهداية والرحمة'.",
         index: [
-          "Chapter 1: The Challenges",
-          "Chapter 2: The Path of Guidance",
-          "Chapter 3: Overcoming Obstacles",
+          {
+            title: "Chapter 1: The Challenges",
+            details:
+              "Examines the challenges in the context of دين الهداية والرحمة.",
+          },
+          {
+            title: "Chapter 2: The Path of Guidance",
+            details: "Discusses the path of guidance in Islamic teachings.",
+          },
+          {
+            title: "Chapter 3: Overcoming Obstacles",
+            details:
+              "Provides solutions for overcoming obstacles in دين الهداية والرحمة.",
+          },
         ],
       },
     ],
@@ -572,9 +709,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'الدعوة إلى الإسلام في أوربا'.",
         index: [
-          "Chapter 1: Introduction",
-          "Chapter 2: Methods",
-          "Chapter 3: Case Studies",
+          {
+            title: "Chapter 1: Introduction",
+            details: "Introduces the topic of الدعوة إلى الإسلام في أوربا.",
+          },
+          {
+            title: "Chapter 2: Methods",
+            details: "Discusses various methods of الدعوة in Europe.",
+          },
+          {
+            title: "Chapter 3: Case Studies",
+            details: "Provides case studies on الدعوة to Islam in Europe.",
+          },
         ],
       },
       {
@@ -582,9 +728,20 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'الدعوة في عصر العولمة'.",
         index: [
-          "Chapter 1: Modern Challenges",
-          "Chapter 2: Effective Strategies",
-          "Chapter 3: Global Impact",
+          {
+            title: "Chapter 1: Modern Challenges",
+            details:
+              "Examines the challenges of الدعوة in the age of globalization.",
+          },
+          {
+            title: "Chapter 2: Effective Strategies",
+            details:
+              "Discusses effective strategies for الدعوة in the modern world.",
+          },
+          {
+            title: "Chapter 3: Global Impact",
+            details: "Explores the global impact of الدعوة efforts.",
+          },
         ],
       },
     ],
@@ -596,18 +753,36 @@ export const categoriesItems = [
         title: "تفسير سورة النور",
         introduction: "This is an introduction to the book 'تفسير سورة النور'.",
         index: [
-          "Chapter 1: Overview",
-          "Chapter 2: Key Themes",
-          "Chapter 3: Interpretations",
+          {
+            title: "Chapter 1: Overview",
+            details: "Provides an overview of سورة النور.",
+          },
+          {
+            title: "Chapter 2: Key Themes",
+            details: "Discusses the key themes in سورة النور.",
+          },
+          {
+            title: "Chapter 3: Interpretations",
+            details: "Examines various interpretations of سورة النور.",
+          },
         ],
       },
       {
         title: "تفسير سورة هود",
         introduction: "This is an introduction to the book 'تفسير سورة هود'.",
         index: [
-          "Chapter 1: Overview",
-          "Chapter 2: Key Themes",
-          "Chapter 3: Interpretations",
+          {
+            title: "Chapter 1: Overview",
+            details: "Provides an overview of سورة هود.",
+          },
+          {
+            title: "Chapter 2: Key Themes",
+            details: "Discusses the key themes in سورة هود.",
+          },
+          {
+            title: "Chapter 3: Interpretations",
+            details: "Examines various interpretations of سورة هود.",
+          },
         ],
       },
     ],
@@ -620,9 +795,21 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'غيث الديمة بشرح الدرة اليتيمة الجزء الأول'.",
         index: [
-          "Chapter 1: Introduction",
-          "Chapter 2: Core Concepts",
-          "Chapter 3: Examples",
+          {
+            title: "Chapter 1: Introduction",
+            details:
+              "Introduces the first part of غيث الديمة بشرح الدرة اليتيمة.",
+          },
+          {
+            title: "Chapter 2: Core Concepts",
+            details:
+              "Explains the core concepts of علم النحو in the first part.",
+          },
+          {
+            title: "Chapter 3: Examples",
+            details:
+              "Provides examples related to the core concepts in the first part.",
+          },
         ],
       },
       {
@@ -630,9 +817,20 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'غيث الديمة بشرح الدرة اليتيمة الجزء الثاني'.",
         index: [
-          "Chapter 1: Advanced Topics",
-          "Chapter 2: Case Studies",
-          "Chapter 3: Practical Applications",
+          {
+            title: "Chapter 1: Advanced Topics",
+            details:
+              "Discusses advanced topics in علم النحو in the second part.",
+          },
+          {
+            title: "Chapter 2: Case Studies",
+            details: "Includes case studies to illustrate advanced topics.",
+          },
+          {
+            title: "Chapter 3: Practical Applications",
+            details:
+              "Explores practical applications of علم النحو in the second part.",
+          },
         ],
       },
     ],
@@ -645,9 +843,18 @@ export const categoriesItems = [
         introduction:
           "This is an introduction to the book 'الإسلام وضرورات الحياة'.",
         index: [
-          "Chapter 1: Basic Needs",
-          "Chapter 2: Social Impact",
-          "Chapter 3: Religious Perspectives",
+          {
+            title: "Chapter 1: Basic Needs",
+            details: "Discusses the basic needs addressed by Islam.",
+          },
+          {
+            title: "Chapter 2: Social Impact",
+            details: "Examines the social impact of fulfilling these needs.",
+          },
+          {
+            title: "Chapter 3: Religious Perspectives",
+            details: "Explores religious perspectives on basic needs.",
+          },
         ],
       },
     ],
@@ -659,9 +866,18 @@ export const categoriesItems = [
         title: "القراءة",
         introduction: "This is an introduction to the book 'القراءة'.",
         index: [
-          "Chapter 1: Importance",
-          "Chapter 2: Benefits",
-          "Chapter 3: Reading Strategies",
+          {
+            title: "Chapter 1: Importance",
+            details: "Discusses the importance of reading.",
+          },
+          {
+            title: "Chapter 2: Benefits",
+            details: "Explores the benefits of reading.",
+          },
+          {
+            title: "Chapter 3: Reading Strategies",
+            details: "Provides strategies for effective reading.",
+          },
         ],
       },
     ],

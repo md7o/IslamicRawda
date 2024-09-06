@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { headerData } from "../../utils/header_data";
 import useSearch from "../../hooks/useSearch";
 import searchIcon from "../../assets/images/search.png";
 import filterIcon from "../../assets/images/filter.png";
@@ -7,6 +8,10 @@ import menuIcon from "../../assets/images/menu.png";
 import "../../App.css";
 
 const HeaderApp = () => {
+  const location = useLocation();
+  const { category } = location.state || {};
+  const navigate = useNavigate();
+
   const [showInput, setShowInput] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,27 +19,26 @@ const HeaderApp = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isMobileFilter, setIsMobileFilter] = useState(window.innerWidth < 768);
 
-  const navigate = useNavigate();
+  // const HeaderCategories = [
+  //   { name: "مؤلفات" },
+  //   { name: "رحلات" },
+  //   { name: "شخصيات" },
+  //   { name: "حوارات" },
+  //   { name: "مقالات" },
+  //   { name: "رسائل" },
+  //   { name: "قصائد" },
+  //   { name: "المنتدى" },
+  // ];
 
-  const HeaderCategories = [
-    { name: "مؤلفات" },
-    { name: "رحلات" },
-    { name: "شخصيات" },
-    { name: "حوارات" },
-    { name: "مقالات" },
-    { name: "رسائل" },
-    { name: "قصائد" },
-    { name: "المنتدى" },
-  ];
+  // const handleCategoryHeader = (categoryData) => {
+  //   navigate("/categories", { state: { category: categoryData } });
+  // };
 
-  const handleCategoryHeader = (categoryData) => {
-    navigate("/categories", { state: { category: categoryData } });
+  const handleCategoryHeader = (header) => {
+    navigate("/header_content", { state: { header } });
   };
 
-  const { query, setQuery, filteredItems } = useSearch(
-    HeaderCategories,
-    "name"
-  );
+  // const { query, setQuery, filteredItems } = useSearch(headerData, "name");
 
   useEffect(() => {
     const handleResize = () => {
@@ -99,14 +103,29 @@ const HeaderApp = () => {
 
   return (
     <div>
-      <div className="bg-primaryColor text-white sm:text-lg text-sm font-bold sm:py2 py-5 flex sm:justify-around justify-center items-center ">
+      <div className="bg-primaryColor text-white hover: sm:text-lg text-sm font-bold sm:py2 py-5 flex sm:justify-around justify-center items-center ">
         <Link to={"/addsubject"} className="sm:flex hidden">
           إضافة موضوع +
         </Link>
         <div className="flex sm:gap-8 gap-4">
-          <a>حول الموقع</a>
-          <a>تعريف بصاحب الموقع</a>
-          <a>الصفحة الرئيسية</a>
+          <Link
+            to={"/about_website"}
+            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
+          >
+            حول الموقع
+          </Link>
+          <Link
+            to={"/owner_id"}
+            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
+          >
+            تعريف بصاحب الموقع
+          </Link>
+          <Link
+            to={"/"}
+            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
+          >
+            الصفحة الرئيسية
+          </Link>
         </div>
       </div>
       <div className="flex 3xl:justify-center 2.5xl:justify-between sm:justify-around justify-between mx-5 items-center my-5 gap-32">
@@ -161,13 +180,13 @@ const HeaderApp = () => {
         </button>
 
         <ul className="2.5xl:flex hidden flex-row-reverse justify-center items-center gap-5">
-          {HeaderCategories.map((categories, index) => (
+          {headerData.map((content, index) => (
             <li
               key={index}
-              onClick={() => handleCategoryHeader(categories)}
+              onClick={() => handleCategoryHeader(content)}
               className="px-3 text-2xl relative group cursor-pointer"
             >
-              {categories.name}
+              {content.headerTitle}
               <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
             </li>
           ))}
@@ -195,13 +214,13 @@ const HeaderApp = () => {
             </button>
 
             <ul className="flex flex-col justify-center items-center h-full">
-              {HeaderCategories.map((categories, index) => (
+              {headerData.map((content, index) => (
                 <li
                   key={index}
-                  onClick={() => handleCategoryHeader(categories)}
+                  onClick={() => handleCategoryHeader(content)}
                   className="px-3 py-5 text-center text-3xl text-white"
                 >
-                  {categories.name}
+                  {content.headerTitle}
                 </li>
               ))}
             </ul>

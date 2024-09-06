@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Header from "../widget/Header";
 
 const CatagoriesBody = () => {
   const location = useLocation();
@@ -16,6 +17,8 @@ const CatagoriesBody = () => {
 
   return (
     <div>
+      {/* <Header /> */}
+
       <div className="bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl">
         {/* category data */}
 
@@ -25,14 +28,14 @@ const CatagoriesBody = () => {
               {category.categoryTitle}
             </h1>
             <div className="w-1/2 h-0.5  bg-white my-4 rounded-full ml-auto" />
-            <div className="space-y-2 mb-10">
+            <div className="space-y-3 mb-10">
               {category.categoryContent.map((content, index) => (
                 <button
                   key={index}
                   className="flex flex-col ml-auto"
                   onClick={() => handleBookNavigation(content)}
                 >
-                  <p className="text-xl overflow-hidden text-ellipsis whitespace-nowrap">
+                  <p className="text-xl overflow-hidden text-ellipsis whitespace-nowrap hover:text-darkColor duration-100">
                     {content.title} -
                   </p>
                 </button>
