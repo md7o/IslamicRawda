@@ -5,7 +5,12 @@ import Header from "../components/widget/Header";
 
 const HeaderContent = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { header } = location.state || {};
+
+  const handleBookNavigation = (content) => {
+    navigate("/book", { state: { bookData: content } });
+  };
 
   return (
     <div>
@@ -21,7 +26,7 @@ const HeaderContent = () => {
               <button
                 key={index}
                 className="flex flex-col ml-auto"
-                // onClick={() => handleBookNavigation(content)}
+                onClick={() => handleBookNavigation(items)}
               >
                 <p className="text-xl my-1 overflow-hidden text-ellipsis whitespace-nowrap hover:text-darkColor duration-100">
                   {items.title} -

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { headerData } from "../../utils/header_data";
 import useSearch from "../../hooks/useSearch";
 import searchIcon from "../../assets/images/search.png";
@@ -8,8 +8,6 @@ import menuIcon from "../../assets/images/menu.png";
 import "../../App.css";
 
 const HeaderApp = () => {
-  const location = useLocation();
-  const { category } = location.state || {};
   const navigate = useNavigate();
 
   const [showInput, setShowInput] = useState(false);
@@ -18,17 +16,6 @@ const HeaderApp = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isMobileFilter, setIsMobileFilter] = useState(window.innerWidth < 768);
-
-  // const HeaderCategories = [
-  //   { name: "مؤلفات" },
-  //   { name: "رحلات" },
-  //   { name: "شخصيات" },
-  //   { name: "حوارات" },
-  //   { name: "مقالات" },
-  //   { name: "رسائل" },
-  //   { name: "قصائد" },
-  //   { name: "المنتدى" },
-  // ];
 
   // const handleCategoryHeader = (categoryData) => {
   //   navigate("/categories", { state: { category: categoryData } });
@@ -175,11 +162,11 @@ const HeaderApp = () => {
           <img
             src={menuIcon}
             alt="search icon"
-            className="w-6 2.5xl:hidden flex"
+            className="w-6 2xl:hidden flex"
           />
         </button>
 
-        <ul className="2.5xl:flex hidden flex-row-reverse justify-center items-center gap-5">
+        <ul className="2xl:flex hidden flex-row-reverse justify-center items-center gap-5">
           {headerData.map((content, index) => (
             <li
               key={index}
@@ -190,9 +177,13 @@ const HeaderApp = () => {
               <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
             </li>
           ))}
+          <li className="px-3 text-2xl relative group cursor-pointer">
+            <a href="https://www.al-rawdah.net/vb/">المنتدى</a>
+            <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
+          </li>
         </ul>
 
-        <p className="4xl:text-3xl text-xl ml-10 3.5xl:flex hidden">
+        <p className="3.5xl:text-3xl text-xl ml-10 3xl:flex hidden">
           موقع الروضة الإسلامي
         </p>
       </div>
@@ -218,7 +209,7 @@ const HeaderApp = () => {
                 <li
                   key={index}
                   onClick={() => handleCategoryHeader(content)}
-                  className="px-3 py-5 text-center text-3xl text-white"
+                  className="px-3 py-5 text-center text-3xl text-white cursor-pointer hover:text-darkColor duration-200"
                 >
                   {content.headerTitle}
                 </li>

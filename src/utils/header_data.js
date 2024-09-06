@@ -1,41 +1,4 @@
-import { categoriesItems } from "./cate_data";
-
-const selectedCategories = [
-  "الرحلات",
-  "تربية",
-  "العقيدة",
-  "فقه",
-  "سياسة شرعية",
-  "دعوة",
-  "تفسير",
-  "نحو",
-  "مقاصد",
-  "ثقافة عامة",
-];
-
 export const headerData = [
-  //   {
-  //     headerTitle: "مؤلفات",
-  //     content: categoriesItems
-  //       .filter((category) => selectedCategories.includes(category.categoryTitle))
-  //       .map((category) => ({
-  //         title: category.categoryTitle,
-  //         index: category.categoryContent.filter(
-  //           (contentItem) => contentItem.title
-  //         ),
-  //       })),
-  //   },
-  //   {
-  //     headerTitle: "رحلات",
-  //     content: categoriesItems
-  //       .filter((category) => category.categoryTitle === "الرحلات")
-  //       .map((category) => ({
-  //         title: category.categoryTitle,
-  //         index: category.categoryContent.filter(
-  //           (contentItem) => contentItem.title
-  //         ),
-  //       })),
-  //   },
   {
     headerTitle: "شخصيات",
     content: [
@@ -49,7 +12,7 @@ export const headerData = [
             details: "Introduction to the series and its purpose.",
           },
           {
-            title: "الغاية من الأسفار",
+            title: "تجربة تجربة",
             details:
               "The objective and goals of traveling as discussed in the series.",
           },
@@ -1002,9 +965,5 @@ export const headerData = [
         ],
       },
     ],
-  },
-
-  {
-    headerTitle: "المنتدى",
   },
 ];

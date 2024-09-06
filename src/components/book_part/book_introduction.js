@@ -1,5 +1,4 @@
 import React from "react";
-import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Bookintroduction = () => {
