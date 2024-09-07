@@ -6,6 +6,9 @@ const CategoriesList = () => {
   const handleCategoryData = (category) => {
     navigate("/categories", { state: { category } });
   };
+  const handleBookNavigation = (content) => {
+    navigate("/book", { state: { bookData: content } });
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 2.5xl:grid-cols-4 2.5xl:max-w-7xl lg:max-w-2xl max-w-xs mx-auto gap-10">
@@ -21,12 +24,17 @@ const CategoriesList = () => {
           <div className="w-full h-0.5 bg-white my-4 rounded-full" />
           <div className="flex-1 space-y-2">
             {items.categoryContent.slice(0, 7).map((content, i) => (
-              <p
-                key={i}
-                className="text-lg overflow-hidden text-ellipsis whitespace-nowrap"
+              <button
+                onClick={() => handleBookNavigation(content)}
+                className="w-full text-right overflow-auto space-y-2"
               >
-                {content.title}
-              </p>
+                <p
+                  key={i}
+                  className="text-white text-lg truncate hover:text-darkColor duration-200"
+                >
+                  {content.title}
+                </p>
+              </button>
             ))}
           </div>
           <div className="mt-auto pt-4">

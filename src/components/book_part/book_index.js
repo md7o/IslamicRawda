@@ -19,11 +19,13 @@ const BookIndex = () => {
       <Header />
 
       <div className="text-center bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl xl:px-44 mt-16">
-        <h1 className="text-3xl font-bold text-white py-16">فهرس الموضوعات</h1>
-        <div className="text-right bg-primaryColor text-white w-full max-w-lg rounded-SmallRounded p-8 mx-auto ">
+        <h1 className="md:text-3xl text-2xl font-bold text-white py-16">
+          فهرس الموضوعات
+        </h1>
+        <div className="text-right bg-primaryColor text-white max-w-xl rounded-SmallRounded p-8 mx-auto ">
           {bookData.index.map((item, index) => (
-            <Link to={`/book/${index}`} state={{ bookData }}>
-              <p className="xl:text-2xl text-lg text-white hover:text-darkColor duration-100 xl:py-2 py-1">
+            <Link key={index} to={`/book/${index}`} state={{ bookData }}>
+              <p className="xl:text-2xl md:text-lg text-white hover:text-darkColor duration-100 xl:py-2 py-1">
                 {item.title} -
               </p>
             </Link>

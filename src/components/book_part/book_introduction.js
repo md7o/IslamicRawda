@@ -21,7 +21,7 @@ const Bookintroduction = () => {
         <h1 className="text-2xl md:text-4xl font-bold text-white py-16">
           {bookData.title}
         </h1>
-        <p className="md:text-2xl text-xl text-white pb-10">
+        <p className="md:text-2xl text-xl text-white pb-10 px-5 text-center xl:mx-52 md:leading-[2] leading-[2]">
           {bookData.introduction}
         </p>
         <div className="text-center py-10">

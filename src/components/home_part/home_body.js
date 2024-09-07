@@ -5,7 +5,7 @@ import CategoriesList from "./widget/categories_list";
 const HomeBody = () => {
   return (
     <div>
-      <div className="bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl">
+      <div className="bg-darkColor mt-20 h-full w-full md:w-3/4 mx-auto rounded-3xl">
         <Artical />
         <div className="w-3/4 h-0.5 mx-auto rounded-full bg-white my-16" />
         <GeneralArticals />

@@ -1,5 +1,6 @@
 * {
   font-family: "Cairo";
+  user-select: none;
 }
 
 @keyframes slideIn {

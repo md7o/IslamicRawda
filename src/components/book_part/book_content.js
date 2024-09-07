@@ -36,21 +36,21 @@ const BookContent = () => {
   return (
     <div>
       <Header />
-      <div className="text-center bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl lg:px-44 mt-16">
-        <div className="flex justify-between items-center mx-20">
+      <div className="text-center bg-darkColor h-full w-full md:w-4/5 mx-auto rounded-3xl lg:px-20 mt-16">
+        <div className="flex justify-between items-center md:mx-20 sm:mx-10 mx-3">
           <p className="bg-primaryColor text-3xl rounded-full text-white w-10 h-10 flex justify-center items-center">
             {currentIndex + 1}
           </p>
           <div className="text-right space-y-2 py-8">
-            <h1 className="text-2xl md:text-3xl font-bold text-white ">
+            <h1 className="text-lg md:text-3xl font-bold text-white ">
               {bookDetails.title}
             </h1>
-            <p className="text-lg md:text-2xl font-light text-white ">
+            <p className="text-xs md:text-2xl sm:text-lg font-light text-white ">
               ( {bookData.title} )
             </p>
           </div>
         </div>
-        <p className="text-2xl text-white py-10 max-w-6xl text-right mx-auto">
+        <p className="md:text-2xl text-xl text-white pb-10 px-5 text-right 3xl:mx-20 md:leading-[2] leading-[2]">
           {bookDetails.details}
         </p>
 
