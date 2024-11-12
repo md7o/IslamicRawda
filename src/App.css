@@ -1,6 +1,43 @@
 * {
+  font-family: "cairo";
+  /* font-family: "tahoma"; */
+  /* user-select: none; */
+}
+pre {
   font-family: "Cairo";
-  user-select: none;
+}
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Dark Theme */
+body.dark {
+  --background-color: #161616;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+.bg-light {
+  background-color: #ffffff;
+  --text-color: #000000;
+}
+
+.bg-dark {
+  background-color: #1a1a1a;
+  --text-color: #ffffff;
+}
+
+.textC {
+  color: var(--text-color);
+}
+
+main {
+  margin-top: 10rem;
 }
 
 @keyframes slideIn {

@@ -14,8 +14,6 @@ const HeaderContent = () => {
 
   return (
     <div>
-      <Header />
-
       <div className="bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl">
         <h1 className="text-3xl font-bold text-white text-center py-10">
           {header.headerTitle}

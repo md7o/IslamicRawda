@@ -1,55 +1,134 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { headerData } from "../../utils/header_data";
-import useSearch from "../../hooks/useSearch";
-import searchIcon from "../../assets/images/search.png";
-import filterIcon from "../../assets/images/filter.png";
-import menuIcon from "../../assets/images/menu.png";
+import dark from "../../assets/images/night-mode.png";
+import light from "../../assets/images/brightness.png";
+import menuIconWhite from "../../assets/images/burger-bar-white.png";
+import menuIconBlack from "../../assets/images/burger-bar-black.png";
+import { useTheme } from "../../hooks/theme_contenxt";
 import "../../App.css";
 
 const HeaderApp = () => {
   const navigate = useNavigate();
 
-  const [showInput, setShowInput] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isMobileFilter, setIsMobileFilter] = useState(window.innerWidth < 768);
+  const { theme, toggleTheme } = useTheme();
+  const [headerList, setHeaderList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
-  // const handleCategoryHeader = (categoryData) => {
-  //   navigate("/categories", { state: { category: categoryData } });
-  // };
-
-  const handleCategoryHeader = (header) => {
-    navigate("/header_content", { state: { header } });
+  // Function to handle category data navigation
+  const handleCategoryData = (category) => {
+    const selectedCategory = headerList.find(
+      (cat) => cat.categoryTitle === category.categoryTitle
+    );
+    const slicedData = selectedCategory ? selectedCategory.articles : [];
+    navigate("/categories", { state: { bookData: category, slicedData } });
   };
 
-  // const { query, setQuery, filteredItems } = useSearch(headerData, "name");
+  // Function to navigate to the book detail page
+  const handleBookNavigation = (content) => {
+    navigate("/book", { state: { bookData: content } });
+  };
+
+  const bookLinks = [
+    {
+      categoryTitle: "شخصيات",
+      items: ["per"],
+    },
+    {
+      categoryTitle: "حوارات",
+      items: ["hiwarat1", "hiwarat2"],
+    },
+    // {
+    //   categoryTitle: "مقالات",
+    //   items: ["a5_jihad", "a5_general3", "a5_pal"],
+    // },
+    {
+      categoryTitle: "رسائل",
+      items: [
+        "message001",
+        "message002",
+        "message003",
+        "message004",
+        "message005",
+        "message006",
+        "message007",
+      ],
+    },
+    {
+      categoryTitle: "قصائد",
+      items: ["poet"],
+    },
+  ];
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    const handleResizeFilter = () => {
-      setIsMobileFilter(window.innerWidth < 768);
+    const fetchFile = async (fileName) => {
+      try {
+        const response = await fetch(`/data/${fileName}.txt`);
+        if (!response.ok) throw new Error(`Failed to fetch ${fileName}.txt`);
+        return await response.text();
+      } catch (error) {
+        console.error(`Error fetching ${fileName}.txt:`, error);
+        return null;
+      }
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("resize", handleResizeFilter);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("resize", handleResizeFilter);
+    const parseArticles = (data) => {
+      return data
+        .split("[z]")
+        .slice(1)
+        .map((section) => {
+          const [introduction] = section.split("[/z]");
+          const lines = section.trim().split("\n");
+          const title = lines[0]?.trim() || "Untitled";
+          const content = lines.slice(2).join("\n").trim();
+          const indices = lines
+            .map((line, index) =>
+              line.includes("[s1]") ? lines[index + 1]?.trim() : null
+            )
+            .filter(Boolean);
+          return title
+            ? { title, introduction: introduction.trim(), content, indices }
+            : null;
+        })
+        .filter(Boolean);
     };
+
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const results = await Promise.all(
+          bookLinks.map(async (link) => ({
+            categoryTitle: link.categoryTitle,
+            articles: (
+              await Promise.all(link.items.map(fetchFile))
+            ).flatMap((data) => (data ? parseArticles(data) : [])),
+          }))
+        );
+        setHeaderList(results);
+      } catch (error) {
+        console.error("Error fetching all text files:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
-    if (!isMobile) {
-      setShowInput(false);
-      setShowFilter(false);
-    }
-  }, [isMobile]);
+    const handleResize = () => {
+      if (window.innerWidth >= 1800) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleMenu = () => {
     setIsAnimating(true);
@@ -65,155 +144,240 @@ const HeaderApp = () => {
 
   const closeMenu = () => {
     setIsAnimating(true);
-    setTimeout(() => {
-      setIsMenuOpen(false);
-    });
+
+    setIsMenuOpen(false);
   };
 
-  const toggleSearchInput = () => {
-    setShowInput((prev) => {
-      if (!prev && showFilter) {
-        setShowFilter(false);
-      }
-      return !prev;
-    });
-  };
-
-  const toggleFilter = () => {
-    setShowFilter((prev) => {
-      if (!prev && showInput) {
-        setShowInput(false);
-      }
-      return !prev;
-    });
+  const toggleDropdown = (categoryTitle) => {
+    setOpenDropdown((prev) => (prev === categoryTitle ? null : categoryTitle));
   };
 
   return (
     <div>
-      <div className="bg-primaryColor text-white hover: sm:text-lg text-sm font-bold sm:py2 py-5 flex sm:justify-around justify-center items-center ">
-        <Link to={"/addsubject"} className="sm:flex hidden">
-          إضافة موضوع +
-        </Link>
-        <div className="flex sm:gap-8 gap-4">
+      <div
+        className={`${
+          theme === "light" ? "bg-white text-black" : "bg-zinc-950 text-white"
+        } fixed top-0 left-0  w-full shadow-md text-opacity-75 sm:text-xl text-md font-bold py-5 px-4 sm:px-8 flex flex-row-reverse sm:justify-evenly justify-between items-center z-50 `}
+      >
+        <div className="flex sm:gap-8 gap-4 ">
           <Link
-            to={"/about_website"}
-            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
-          >
-            حول الموقع
-          </Link>
-          <Link
-            to={"/owner_id"}
-            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
+            to={"/owner-id"}
+            className="hover:text-primaryColor 2xl:block hidden"
           >
             تعريف بصاحب الموقع
           </Link>
           <Link
-            to={"/"}
-            className="hover:bg-white hover:text-darkColor hover:rounded-lg hover:px-1 duration-300"
+            to={"/about-website"}
+            className="hover:text-primaryColor 2xl:block hidden "
           >
+            حول الموقع
+          </Link>
+          <Link to={"/"} className="hover:text-primaryColor font-extrabold">
             الصفحة الرئيسية
           </Link>
-        </div>
-      </div>
-      <div className="flex 3xl:justify-center 2.5xl:justify-between sm:justify-around justify-between mx-5 items-center my-5 gap-32">
-        <div className="flex justify-center items-center lg:gap-5 gap-2">
-          <button
-            onClick={toggleFilter}
-            className="lg:hidden bg-gray-200 p-2 rounded-SmallRounded"
-          >
-            <img src={filterIcon} alt="search icon" className="w-5 h-5 " />
-          </button>
-          <div
-            className={`relative ${showFilter ? "block" : "hidden"} lg:block`}
-          >
-            <select
-              name="dateComparison"
-              className="bg-gray-300 rounded-SmallRounded text-right py-1 lg:w-80 w-44 lg:relative lg:right-0 lg:translate-y-0 lg:translate-x-0 absolute right-0 translate-y-6 translate-x-32"
-            >
-              <option>جميع محتويات الكتاب</option>
-              <option>Greater_than</option>
-              <option>Less_than</option>
-            </select>
-          </div>
 
-          <button
-            onClick={toggleSearchInput}
-            className="md:hidden bg-gray-200 p-2 rounded-SmallRounded"
-          >
-            <img src={searchIcon} alt="search icon" className="w-5 h-5" />
-          </button>
-
-          <div
-            className={`relative ${showInput ? "block" : "hidden"} md:block`}
-          >
-            <input
-              type="text"
-              placeholder="جملة البحث"
-              className="bg-gray-300 rounded-SmallRounded text-right py-1 px-5 md:w-80 w-44 md:relative md:right-0 md:translate-y-0 md:translate-x-0 absolute right-0 translate-y-6 translate-x-32"
-            />
+          <button onClick={toggleMenu}>
             <img
-              src={searchIcon}
-              alt="search icon"
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
+              src={theme === "dark" ? menuIconWhite : menuIconBlack}
+              alt="Menu icon"
+              className="w-6 2xl:hidden flex sm:ml-5 ml-0 hover:scale-95 duration-100"
             />
-          </div>
+          </button>
         </div>
-        <button onClick={toggleMenu}>
-          <img
-            src={menuIcon}
-            alt="search icon"
-            className="w-6 2xl:hidden flex"
-          />
-        </button>
-
-        <ul className="2xl:flex hidden flex-row-reverse justify-center items-center gap-5">
-          {headerData.map((content, index) => (
-            <li
-              key={index}
-              onClick={() => handleCategoryHeader(content)}
-              className="px-3 text-2xl relative group cursor-pointer"
-            >
-              {content.headerTitle}
-              <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
+        <ul className="2xl:flex hidden flex-row-reverse justify-center items-center gap-10">
+          {headerList.map((category, index) => (
+            <li key={index} className="relative">
+              <span
+                onClick={() => {
+                  if (
+                    category.categoryTitle === "شخصيات" ||
+                    category.categoryTitle === "قصائد"
+                  ) {
+                    handleCategoryData(category);
+                  } else {
+                    toggleDropdown(category.categoryTitle);
+                  }
+                }}
+                className="cursor-pointer hover:text-primaryColor flex items-center "
+              >
+                {category.categoryTitle}
+                {category.categoryTitle !== "شخصيات" &&
+                  category.categoryTitle !== "قصائد" && (
+                    <svg
+                      className={`w-4 h-4 ml-1 transform  ${
+                        openDropdown === category.categoryTitle
+                          ? "rotate-180"
+                          : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+              </span>
+              {openDropdown === category.categoryTitle && (
+                <ul
+                  className={`${
+                    theme === "light"
+                      ? "bg-gray-100 text-darkColor"
+                      : "bg-zinc-800 text-white"
+                  } absolute top-full right-0 min-w-72 mt-2 text-base  rounded-md z-20 shadow-2xl`}
+                >
+                  {category.articles.map((content, idx) => (
+                    <li
+                      key={idx}
+                      onClick={() => {
+                        handleBookNavigation(content);
+                        setOpenDropdown(null);
+                      }}
+                      className={`px-4 py-3 text-right ${
+                        theme === "light"
+                          ? "hover:bg-gray-300"
+                          : "hover:bg-zinc-500"
+                      } cursor-pointer duration-200`}
+                    >
+                      {content.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
-          <li className="px-3 text-2xl relative group cursor-pointer">
-            <a href="https://www.al-rawdah.net/vb/">المنتدى</a>
-            <div className="absolute left-1/2 -bottom-0.5 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-2/3 transform -translate-x-1/2 ease-in-out" />
-          </li>
+          <a
+            href="https://www.al-rawdah.net/vb/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primaryColor font-extrabold"
+          >
+            منتدى
+          </a>
         </ul>
 
-        <p className="3.5xl:text-3xl text-xl ml-10 3xl:flex hidden">
-          موقع الروضة الإسلامي
-        </p>
+        <div>
+          <button className="mr-5" onClick={toggleTheme}>
+            {theme === "light" ? (
+              <img src={light} alt="Light Mode" className="w-8" />
+            ) : (
+              <img src={dark} alt="Dark Mode" className="w-8" />
+            )}
+          </button>
+        </div>
       </div>
+
       {(isMenuOpen || isAnimating) && (
         <div
-          className={`fixed inset-0 z-50 ${
+          className={`fixed -inset-0 z-50  ${
             isMenuOpen ? "slide-in" : "slide-out"
           }`}
+          style={{ direction: "rtl" }}
           onAnimationEnd={() => {
             if (!isMenuOpen) setIsAnimating(false);
           }}
         >
-          <div className="bg-primaryColor w-full h-full p-5 flex flex-col justify-center items-center">
+          <div className="bg-primaryColor shadow-2xl md:w-1/3 h-full flex flex-col items-end p-5 text-primaryColor font-bold lg:text-2xl text-xl  ">
             <button
-              className="self-end text-3xl text-white rounded-full"
+              className=" w-11 h-12 text-4xl flex justify-center  bg-secondlyColor rounded-full hover:scale-90 duration-300"
               onClick={closeMenu}
             >
-              x
+              ×
             </button>
 
-            <ul className="flex flex-col justify-center items-center h-full">
-              {headerData.map((content, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleCategoryHeader(content)}
-                  className="px-3 py-5 text-center text-3xl text-white cursor-pointer hover:text-darkColor duration-200"
-                >
-                  {content.headerTitle}
+            {/* Mobile menu items */}
+            <ul className="flex flex-col justify-start mt-5 lg:items-start items-start h-full space-y-3 w-full ">
+              <Link
+                to={"/owner-id"}
+                className=" hover:scale-95 duration-200 bg-secondlyColor px-5 py-3 w-full rounded-SmallRounded "
+                onClick={() => setIsMenuOpen(false)}
+              >
+                تعريف بصاحب الموقع
+              </Link>
+              {/* <div className=" bg-white h-0.5 w-full mb-2 " /> */}
+              <Link
+                className=" hover:scale-95 duration-200 bg-secondlyColor px-5 py-3 w-full rounded-SmallRounded "
+                onClick={() => setIsMenuOpen(false)}
+                to={"/about-website"}
+              >
+                حول الموقع
+              </Link>
+              {/* Dynamically render categories */}
+              {headerList.map((category, index) => (
+                <li key={index} className="relative w-full ">
+                  <span
+                    onClick={() => {
+                      if (
+                        category.categoryTitle === "شخصيات" ||
+                        category.categoryTitle === "قصائد"
+                      ) {
+                        handleCategoryData(category);
+                        setIsMenuOpen(false);
+                      } else {
+                        toggleDropdown(category.categoryTitle);
+                      }
+                    }}
+                    className="cursor-pointer  flex items-center bg-secondlyColor px-5 py-3  rounded-SmallRounded hover:scale-95 duration-200"
+                  >
+                    {category.categoryTitle}
+                    {category.categoryTitle !== "شخصيات" &&
+                      category.categoryTitle !== "قصائد" && (
+                        <svg
+                          className={`w-4 h-4 mr-2 transform ${
+                            openDropdown === category.categoryTitle
+                              ? "rotate-180"
+                              : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      )}
+                  </span>
+
+                  {/* Dropdown items */}
+                  {openDropdown === category.categoryTitle && (
+                    <ul className="absolute top-full right-0 w-96 mt-2 text-base bg-white dark:bg-zinc-800 shadow-lg rounded-md z-50">
+                      {category.articles.map((content, idx) => (
+                        <li
+                          key={idx}
+                          onClick={() => {
+                            handleBookNavigation(content);
+                            setOpenDropdown(null);
+                            setIsMenuOpen(false);
+                          }}
+                          className="px-4 py-3 text-right hover:bg-gray-100 dark:hover:bg-zinc-700 cursor-pointer"
+                        >
+                          {content.title}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
+
+              <a
+                href="https://www.al-rawdah.net/vb/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="hover:scale-95 duration-200 bg-secondlyColor px-5 py-3 w-full rounded-SmallRounded "
+              >
+                منتدى
+              </a>
             </ul>
           </div>
         </div>

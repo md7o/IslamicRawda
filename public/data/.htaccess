@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "You Have not Permission to accesss this Directory"
+AuthUserFile "/home/alrawdah/.htpasswds/public_html/data/passwd"
+require valid-user

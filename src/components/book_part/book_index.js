@@ -1,13 +1,14 @@
-import Header from "../../components/widget/Header";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "../../hooks/theme_contenxt";
 
 const BookIndex = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { bookData } = location.state || {};
+  const { theme } = useTheme();
 
-  const handleBookContentNavigation = () => {
-    navigate("/book_content", { state: { bookData } });
+  const handleBookContentNavigation = (index) => {
+    navigate(`/book/${index}`, { state: { bookData } });
   };
 
   if (!bookData) {
@@ -15,35 +16,42 @@ const BookIndex = () => {
   }
 
   return (
-    <div>
-      <Header />
-
-      <div className="text-center bg-darkColor h-full w-full md:w-3/4 mx-auto rounded-3xl xl:px-44 mt-16">
-        <h1 className="md:text-3xl text-2xl font-bold text-white py-16">
+    <main>
+      <div
+        className={` ${
+          theme === "dark" ? "bg-dark" : "bg-secondlyColor"
+        } text-center bg-secondlyColor h-full w-full md:w-3/4 mx-auto rounded-SmallRounded xl:px-44 sm:px-12 px-0 mt-12 pb-14`}
+      >
+        <h1
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } text-center md:text-3xl text-2xl font-extrabold text-darkColor py-10`}
+        >
           فهرس الموضوعات
         </h1>
-        <div className="text-right bg-primaryColor text-white max-w-xl rounded-SmallRounded p-8 mx-auto ">
-          {bookData.index.map((item, index) => (
-            <Link key={index} to={`/book/${index}`} state={{ bookData }}>
-              <p className="xl:text-2xl md:text-lg text-white hover:text-darkColor duration-100 xl:py-2 py-1">
-                {item.title} -
-              </p>
-            </Link>
-          ))}
-        </div>
-        <div className="lg:flex justify-center items-center text-center gap-5 pt-20 pb-5 ">
-          <p className="text-xl text-white font-bold lg:my-0 mb-5">
-            عداد الصفحات اليومي: 2839
-          </p>
-          <p className="text-xl text-white font-bold">
-            عداد الصفحات العام: 15909393
-          </p>
+        <div className="text-right bg-primaryColor text-white max-w-4xl rounded-SmallRounded p-8 mx-auto">
+          <div className="flex-1 space-y-4 px-6 mt-8">
+            {bookData.indices.map((items, index) => (
+              <button
+                key={index}
+                onClick={() => handleBookContentNavigation(index)}
+                className="w-full text-right"
+              >
+                <p
+                  className="text-white text-xl font-bold truncate hover:scale-95 hover:opacity-70 duration-200 "
+                  style={{ direction: "rtl" }}
+                >
+                  {index + 1} - {items}
+                </p>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <p className="text-xl text-darkColor text-center font-bold my-2">
         جميع الحقوق محفوظة لموقع الروضة الإسلامي 1444هـ - 2023م
       </p>
-    </div>
+    </main>
   );
 };
 

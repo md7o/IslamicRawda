@@ -5,13 +5,21 @@ module.exports = {
     extend: {
       colors: {
         primaryColor: "#568C8A",
+        secondlyColor: "#E4F2EF",
         mainColor: "#ffffff",
         darkColor: "#151515",
       },
       borderRadius: {
-        SmallRounded: "10px",
+        SmallRounded: "5px",
         MediumRounded: "20px",
         bigRounded: "30px",
+      },
+      Width: {
+        mini: "500px",
+        small: "2000px",
+      },
+      height: {
+        line: "1px",
       },
       screens: {
         "2.5xl": "1800px",

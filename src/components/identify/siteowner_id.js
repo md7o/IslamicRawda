@@ -1,6 +1,8 @@
-import Header from "../../components/widget/Header";
+import { useTheme } from "../../hooks/theme_contenxt";
 
 const SiteOwnerId = () => {
+  const { theme } = useTheme();
+
   const biography = [
     "من مواليد منطقة (عبس)، شمال اليمن، سنة 1356هـ",
     "هاجر إلى المملكة العربية السعودية سنة 1374هـ لطلب العلم، أكمل المرحلة الثانوية في قرية سامطة بمنطقة جيزان سنة 1382هـ",
@@ -59,17 +61,21 @@ const SiteOwnerId = () => {
   ];
 
   return (
-    <div>
-      <Header />
-
-      <div className="text-right bg-darkColor h-full w-full space-y-5 leading-[1.5] md:w-3/4 mx-auto rounded-3xl xl:px-44 py-14 mt-16">
-        <h1 className="text-white text-3xl pb-10">كلمة حول الموقع</h1>
+    <main>
+      <div
+        className={`${
+          theme === "dark"
+            ? "bg-dark text-white"
+            : "bg-secondlyColor text-black"
+        }  h-full w-full space-y-5 leading-[1.5] md:w-3/4 mx-auto rounded-3xl xl:px-44 px-5 py-14 mt-16`}
+        style={{ direction: "rtl" }}
+      >
+        <h1 className=" text-3xl pb-10">
+          تعريف بصاحب الموقع: الدكتور عبدالله قادري الأهدل
+        </h1>
         <ul className="list-decimal list-inside">
           {biography.map((item, index) => (
-            <li
-              key={index}
-              className="text-xl font-medium text-white leading-[2]"
-            >
+            <li key={index} className="text-xl font-medium  leading-[2]">
               {typeof item === "string" ? (
                 item
               ) : (
@@ -106,20 +112,11 @@ const SiteOwnerId = () => {
           .وللمؤلف مقالات وأبحاث أخرى شارك ببعضها في منتديات الشبكة العالمية
           (الانترنت)
         </p>
-
-        <div className="lg:flex justify-center items-center text-center gap-5 pt-20 pb-5 ">
-          <p className="text-xl text-white font-bold lg:my-0 mb-5">
-            عداد الصفحات اليومي: 2839
-          </p>
-          <p className="text-xl text-white font-bold">
-            عداد الصفحات العام: 15909393
-          </p>
-        </div>
       </div>
       <p className="text-xl text-darkColor text-center font-bold my-2">
         جميع الحقوق محفوظة لموقع الروضة الإسلامي 1444هـ - 2023م
       </p>
-    </div>
+    </main>
   );
 };
 
