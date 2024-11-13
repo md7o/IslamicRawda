@@ -1,7 +1,6 @@
 * {
-  font-family: "cairo";
-  /* font-family: "tahoma"; */
-  /* user-select: none; */
+  font-family: "cairo", "tahoma";
+  user-select: none;
 }
 pre {
   font-family: "Cairo";

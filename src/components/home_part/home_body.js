@@ -12,9 +12,6 @@ const HomeBody = () => {
 
         <RestBookList />
       </div>
-      <p className="text-xl text-darkColor text-center font-bold my-2">
-        جميع الحقوق محفوظة لموقع الروضة الإسلامي 1444هـ - 2023م
-      </p>
     </div>
   );
 };

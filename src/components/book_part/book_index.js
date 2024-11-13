@@ -8,7 +8,7 @@ const BookIndex = () => {
   const { theme } = useTheme();
 
   const handleBookContentNavigation = (index) => {
-    navigate(`/book/${index}`, { state: { bookData } });
+    navigate(`/book/${index + 1}`, { state: { bookData } });
   };
 
   if (!bookData) {

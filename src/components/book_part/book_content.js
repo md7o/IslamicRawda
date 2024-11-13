@@ -15,9 +15,10 @@ const BookContent = () => {
   }
 
   const currentIndex = parseInt(id, 10);
-  const indexTitle = bookData.indices[currentIndex];
+  const indexTitle = bookData.indices[currentIndex - 1];
   const contentSections = bookData.content.split(/\[s1\]/);
-  const currentContent = contentSections[currentIndex + 1] || "";
+  const currentContent = contentSections[currentIndex] || "";
+  // const currentContent = contentSections[currentIndex + 1] || "";
 
   const renderStyledContent = (text) => {
     const parts = text.split(/\[img\](.*?)\[\/img\]/);
@@ -30,7 +31,6 @@ const BookContent = () => {
         );
       }
 
-      // Apply special formatting first
       let contentWithSpecialStyles = part
         .split(/(\{[^}]*\}|\[\[.*?\]\]|\(\(.*?\)\)|\([^)]+\))/)
         .map((subPart, subIndex) => {
@@ -132,15 +132,23 @@ const BookContent = () => {
   };
 
   const handlePrevious = () => {
-    if (currentIndex > 0) {
+    if (currentIndex > 1) {
       navigate(`/book/${currentIndex - 1}`, { state: { bookData } });
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleNext = () => {
     if (currentIndex < bookData.indices.length - 1) {
       navigate(`/book/${currentIndex + 1}`, { state: { bookData } });
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleDetailedContentNavigation = () => {
@@ -152,11 +160,59 @@ const BookContent = () => {
       <div
         className={`${
           theme === "dark" ? "bg-dark" : "bg-secondlyColor"
-        } text-center  h-full w-full md:w-4/6 mx-auto rounded-SmallRounded lg:px-20 mt-16 p-4`}
+        } text-center  h-full w-full md:w-4/6 mx-auto rounded-SmallRounded lg:px-20 my-16 p-4`}
       >
+        <div className="flex justify-between items-center py-10 lg:mx-0 mx-5">
+          <div className="flex justify-center items-center">
+            <button
+              onClick={handleNext}
+              className={`flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 lg:mr-5 mr-5 text-white font-bold rounded-SmallRounded ${
+                currentIndex === bookData.indices.length - 1
+                  ? "bg-gray-500"
+                  : "bg-primaryColor"
+              }`}
+              disabled={currentIndex === bookData.indices.length - 1}
+              aria-label="Next"
+            >
+              <IconChevronLeft className="w-8 h-8" />
+            </button>
+            <p
+              className={`${
+                theme === "dark" ? "text-white" : "text-black"
+              }  lg:text-2xl mr-5`}
+            >
+              التالي
+            </p>
+          </div>
+          <button
+            onClick={handleDetailedContentNavigation}
+            className="text-primaryColor rounded-SmallRounded hover:rounded-MediumRounded duration-300 bg-white p-2 font-bold text-lg"
+          >
+            الفهرس
+          </button>
+          <div className="flex justify-center items-center">
+            <p
+              className={`${
+                theme === "dark" ? "text-white" : "text-black "
+              }  lg:text-2xl ml-5`}
+            >
+              السابق
+            </p>
+            <button
+              onClick={handlePrevious}
+              className={`flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 lg:ml-5 ml-5 text-white font-bold rounded-SmallRounded ${
+                currentIndex === 1 ? "bg-gray-500" : "bg-primaryColor"
+              }`}
+              disabled={currentIndex === 1}
+              aria-label="Previous"
+            >
+              <IconChevronRight className="w-8 h-8" />
+            </button>
+          </div>
+        </div>
         <div className="flex justify-between items-center mt-4">
           <p className="bg-primaryColor lg:text-3xl text-2xl rounded-full text-white lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center">
-            {currentIndex + 1}
+            {currentIndex}
           </p>
           <div className="text-right space-y-2 py-8">
             <h1
@@ -232,9 +288,9 @@ const BookContent = () => {
             <button
               onClick={handlePrevious}
               className={`flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 lg:ml-5 ml-5 text-white font-bold rounded-SmallRounded ${
-                currentIndex === 0 ? "bg-gray-500" : "bg-primaryColor"
+                currentIndex === 1 ? "bg-gray-500" : "bg-primaryColor"
               }`}
-              disabled={currentIndex === 0}
+              disabled={currentIndex === 1}
               aria-label="Previous"
             >
               <IconChevronRight className="w-8 h-8" />
@@ -242,6 +298,13 @@ const BookContent = () => {
           </div>
         </div>
       </div>
+      <p
+        className={`${
+          theme === "dark" ? "text-white" : "text-black"
+        } text-xl text-darkColor text-center font-bold pb-10`}
+      >
+        جميع الحقوق محفوظة لموقع الروضة الإسلامي 1445هـ - 2024م
+      </p>
     </main>
   );
 };

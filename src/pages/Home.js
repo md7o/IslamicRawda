@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/theme_contenxt";
 import HomeBody from "../components/home_part/home_body";
 import useSearch from "../hooks/useSearch";
@@ -150,15 +150,12 @@ const Home = () => {
     setQuery: setQuery1,
     filteredItems: searchResult,
   } = useSearch(searchWeb, ["title", "content"]);
-  console.log("Filtered Items (searchResult):", searchResult);
 
   const handleViewFilteredList = () => {
     if (query1.trim() === "") {
       setErrorMessage("Please enter a search term.");
     } else {
       setErrorMessage("");
-      console.log("query1 List:", query1);
-      console.log("Filtered List before navigating:", searchResult);
       navigate("/search-box", {
         state: { filteredList: searchResult, searchQuery: query1 },
       });
@@ -206,6 +203,13 @@ const Home = () => {
           )}
         </div>
         <HomeBody />
+        <p
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } text-xl text-darkColor text-center font-bold pb-5`}
+        >
+          جميع الحقوق محفوظة لموقع الروضة الإسلامي 1445هـ - 2024م
+        </p>
       </div>
     </main>
   );

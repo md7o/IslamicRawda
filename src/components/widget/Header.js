@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { headerData } from "../../utils/header_data";
 import dark from "../../assets/images/night-mode.png";
 import light from "../../assets/images/brightness.png";
 import menuIconWhite from "../../assets/images/burger-bar-white.png";

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { categoriesItems } from "../../../utils/cate_data";
 const CategoriesList = () => {
   const navigate = useNavigate();
   const [categor, setCategor] = useState([]);

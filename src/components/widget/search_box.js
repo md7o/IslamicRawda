@@ -17,7 +17,7 @@ const SearchBox = () => {
   ) => {
     const article = filteredList[categoryIndex].articles[articleIndex];
 
-    navigate(`/book/${sectionIndex}`, {
+    navigate(`/book/${sectionIndex + 1}`, {
       state: {
         bookData: {
           indices: article.indices,
@@ -39,11 +39,11 @@ const SearchBox = () => {
         <p
           className={`${
             theme === "dark" ? "text-white" : "text-black"
-          }  lg:text-2xl text-lg text-center mb-10`}
+          }  lg:text-2xl md:text-lg text-md text-center mb-10 px-5`}
           style={{ direction: "rtl" }}
         >
           نتيجة الإستعلام عن نتيجة
-          <span className=" lg:text-3xl text-xl font-bold">
+          <span className=" lg:text-3xl md:text-xl text-lg font-bold">
             {" "}
             ( {searchQuery} ){" "}
           </span>{" "}
@@ -103,18 +103,18 @@ const SearchBox = () => {
                                   )
                                 }
                               >
-                                <p className="lg:text-2xl text-lg text-right  text-blue-500 font-bold hover:scale-95 duration-200 py-2">
-                                  {/* [ {section.idx} ] */}-{" "}
+                                <p className="lg:text-2xl md:text-lg text-md text-right  text-blue-500 font-bold hover:scale-95 duration-200 py-2 px-3">
+                                  {/* [ {section.idx} ] */} -{" "}
                                   {section.indexTitle}
                                 </p>
                               </button>
                               <p
                                 className={`${
                                   theme === "dark" ? "text-white" : "text-black"
-                                }  sm:text-xl text-md`}
+                                }  lg:text-xl sm:text-md text-sm`}
                                 style={{ direction: "rtl" }}
                               >
-                                <span className="font-extrabold px-1">
+                                <span className="font-extrabold px-3">
                                   كتاب:
                                 </span>
                                 {article.title}

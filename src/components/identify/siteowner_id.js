@@ -113,8 +113,12 @@ const SiteOwnerId = () => {
           (الانترنت)
         </p>
       </div>
-      <p className="text-xl text-darkColor text-center font-bold my-2">
-        جميع الحقوق محفوظة لموقع الروضة الإسلامي 1444هـ - 2023م
+      <p
+        className={`${
+          theme === "dark" ? "text-white" : "text-black"
+        } text-xl text-darkColor text-center font-bold py-5`}
+      >
+        جميع الحقوق محفوظة لموقع الروضة الإسلامي 1445هـ - 2024م
       </p>
     </main>
   );

@@ -52,21 +52,23 @@ const ArticlesContent = () => {
 
   const handleNext = () => {
     if (currentIndex < articles.length - 1) {
-      const nextIndex = currentIndex + 1; // Increment by 1
+      const nextIndex = currentIndex + 1;
 
-      // Update currentIndex before navigating
       setCurrentIndex(nextIndex);
 
-      // Navigate to the next article with the correct index and source
       navigate(`/article/${nextIndex + 1}`, {
         state: {
           title: articles[nextIndex].title,
           content: articles[nextIndex].content,
-          index: nextIndex + 1, // Pass the correct index in the state
+          index: nextIndex + 1,
           source: source,
         },
       });
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const renderStyledContent = (text) => {
@@ -145,22 +147,24 @@ const ArticlesContent = () => {
   };
 
   const handlePrevious = () => {
-    if (currentIndex > 0) {
-      const prevIndex = currentIndex - 1; // Decrement by 1
+    if (currentIndex > 1) {
+      const prevIndex = currentIndex - 1;
 
-      // Update currentIndex before navigating
       setCurrentIndex(prevIndex);
 
-      // Navigate to the previous article with the correct index and source
       navigate(`/article/${prevIndex + 1}`, {
         state: {
           title: articles[prevIndex].title,
           content: articles[prevIndex].content,
-          index: prevIndex + 1, // Pass the correct index in the state
+          index: prevIndex + 1,
           source: source,
         },
       });
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleDetailedContentNavigation = () => {
@@ -172,8 +176,60 @@ const ArticlesContent = () => {
       <div
         className={`${
           theme === "dark" ? "bg-dark" : "bg-secondlyColor"
-        } text-center  h-full w-full md:w-4/6 mx-auto rounded-SmallRounded lg:px-20 mt-16 p-4`}
+        } text-center  h-full w-full md:w-4/6 mx-auto rounded-SmallRounded lg:px-20 my-16 p-4 `}
       >
+        <div className="flex justify-between items-center py-10 lg:mx-0 mx-5">
+          <div className="flex justify-center items-center">
+            <button
+              onClick={handleNext}
+              disabled={currentIndex === articles.length - 1}
+              className={`${
+                currentIndex === articles.length - 1
+                  ? "bg-gray-500"
+                  : "bg-primaryColor"
+              } flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 text-white font-bold rounded-SmallRounded`}
+              aria-label="Next"
+            >
+              <IconChevronLeft className="w-8 h-8" />
+            </button>
+            <p
+              className={`${
+                theme === "dark" ? "text-white" : "text-black"
+              } text-xl ml-4`}
+            >
+              التالي
+            </p>
+          </div>
+          <button
+            onClick={handleDetailedContentNavigation}
+            className={`${
+              theme === "dark"
+                ? "bg-white text-primaryColor"
+                : "bg-primaryColor text-white"
+            } rounded-SmallRounded hover:rounded-MediumRounded duration-300  p-2 font-bold text-lg`}
+          >
+            الفهرس
+          </button>
+          <div className="flex justify-center items-center">
+            <p
+              className={`${
+                theme === "dark" ? "text-white" : "text-black"
+              } text-xl mr-4`}
+            >
+              السابق
+            </p>
+            <button
+              onClick={handlePrevious}
+              disabled={currentIndex === 1}
+              className={`${
+                currentIndex === 1 ? "bg-gray-500" : "bg-primaryColor"
+              } flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 text-white font-bold rounded-SmallRounded`}
+              aria-label="Previous"
+            >
+              <IconChevronRight className="w-8 h-8" />
+            </button>
+          </div>
+        </div>
         <div className="flex justify-between items-center mt-4">
           <p className="bg-primaryColor lg:text-3xl text-2xl rounded-full text-white lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center">
             {currentIndex + 1}
@@ -253,9 +309,9 @@ const ArticlesContent = () => {
             </p>
             <button
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
+              disabled={currentIndex === 1}
               className={`${
-                currentIndex === 0 ? "bg-gray-500" : "bg-primaryColor"
+                currentIndex === 1 ? "bg-gray-500" : "bg-primaryColor"
               } flex justify-center items-center hover:rounded-MediumRounded duration-300 lg:w-10 lg:h-10 text-white font-bold rounded-SmallRounded`}
               aria-label="Previous"
             >
@@ -264,6 +320,13 @@ const ArticlesContent = () => {
           </div>
         </div>
       </div>
+      <p
+        className={`${
+          theme === "dark" ? "text-white" : "text-black"
+        } text-xl text-darkColor text-center font-bold pb-10`}
+      >
+        جميع الحقوق محفوظة لموقع الروضة الإسلامي 1445هـ - 2024م
+      </p>
     </main>
   );
 };
