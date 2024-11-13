@@ -1,9 +1,10 @@
 * {
-  font-family: "cairo", "tahoma";
+  font-family: Arial, sans-serif;
   user-select: none;
 }
+
 pre {
-  font-family: "Cairo";
+  font-family: Arial, sans-serif;
 }
 
 :root {
@@ -19,6 +20,7 @@ body.dark {
 
 body {
   background-color: var(--background-color);
+  font-family: Arial, sans-serif;
 }
 
 .bg-light {

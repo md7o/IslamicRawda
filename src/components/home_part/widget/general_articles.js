@@ -59,7 +59,7 @@ const GeneralArticals = () => {
   }, []);
 
   return (
-    <div className="text-black font-bold py-10 flex 2xl:flex-row flex-col justify-center gap-3">
+    <div className="text-black font-bold py-10 flex 3xl:flex-row flex-col justify-center gap-3">
       {["tall", "secondFile", "thirdFile"].map((section) => {
         const articles =
           section === "tall"
@@ -97,7 +97,7 @@ const GeneralArticals = () => {
               .map((article, i) => (
                 <button
                   key={i}
-                  className="md:text-2xl text-lg hover:opacity-65 hover:scale-95 duration-200 text-right "
+                  className="md:text-xl text-lg hover:opacity-65 hover:scale-95 duration-200 text-right "
                   onClick={() => handleBookNavigation(article, i, section)}
                 >
                   <p className="font-bold " style={{ direction: "rtl" }}>

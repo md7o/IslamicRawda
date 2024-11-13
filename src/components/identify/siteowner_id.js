@@ -94,8 +94,8 @@ const SiteOwnerId = () => {
             </li>
           ))}
         </ul>
-        <p className="text-white text-2xl font-bold pt-10">:مؤلفاته</p>
-        <p className="text-white text-xl pb-10">
+        <p className=" text-2xl font-bold pt-10">:مؤلفاته</p>
+        <p className=" text-xl pb-10">
           أنجز عدداً من المؤلفات في موضوعات متنوعة بعضها قد طُبع وبعضها لم
           يُطبع، كما أن لديه موضوعات أخرى يريد الكتابة فيها، بعضها قد جمع
           مادتها، لعل الله يسهل له إنجازها جميعاً
@@ -103,12 +103,12 @@ const SiteOwnerId = () => {
         <p className="text-red-300 text-2xl font-bold pt-10">:الكتب المطبوعة</p>
         <ul className="list-decimal list-inside">
           {works.map((work, index) => (
-            <li key={index} className="text-xl text-white leading-[2]">
+            <li key={index} className="text-xl  leading-[2]">
               {work}
             </li>
           ))}
         </ul>
-        <p className="text-white text-xl pb-10">
+        <p className=" text-xl pb-10">
           .وللمؤلف مقالات وأبحاث أخرى شارك ببعضها في منتديات الشبكة العالمية
           (الانترنت)
         </p>
